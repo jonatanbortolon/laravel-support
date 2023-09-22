@@ -49,7 +49,11 @@ class AuthController extends Controller
             return redirect()->route(RouteServiceProvider::HOME);
         }
   
-        return redirect()->route(RouteServiceProvider::LOGIN);
+        return redirect()->back()->withErrors(
+            [
+                'email' => 'Credenciais inválidas.'
+            ]
+        );
     }
       
     public function registerRequest(Request $request)
@@ -79,9 +83,9 @@ class AuthController extends Controller
             'name.required' => 'O nome é obrigatório.',
             'document.required' => 'O CPF é obrigatório.',
             'document.numeric' => 'O CPF é inválido.',
-            'document.unique:users,document' => 'CPF em uso.',
+            'document.unique' => 'CPF em uso.',
             'email.required' => 'O e-mail é obrigatório.',
-            'email.unique:users,email' => 'E-mail em uso.',
+            'email.unique' => 'E-mail em uso.',
             'role.required' => 'O cargo é obrigatório.',
             'role.in' => 'Cargo inválido.',
             'password.required' => 'A senha é obrigatória.',
