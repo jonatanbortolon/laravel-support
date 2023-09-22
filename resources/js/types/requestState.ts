@@ -1,0 +1,1 @@
+export type RequestState = 'open' | 'inprogress' | 'closed'
